@@ -8,7 +8,7 @@ import time
 import os
 
 # 監視対象のディレクトリを指定
-target_dir = 'C:\Users\forechem2\Desktop\ODVeiwer'
+target_dir = 'C:\Users\xxxx\Desktop\ODVeiwer' #xxxを自分のディレクトリに合わせる
 # 監視対象ファイルのパターンマッチを指定
 target_file = '*.txt'
 
