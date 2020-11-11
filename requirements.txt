@@ -1,0 +1,8 @@
+### Requirements without version specifiers ###
+### those are all python libraries          ###
+watchdog
+pandas
+influxdb
+numpy
+
+
