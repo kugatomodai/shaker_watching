@@ -21,7 +21,10 @@ class ChangeHandler(FileSystemEventHandler):
        # subprocess.call([self.command, ])
 
     def on_modified(self, event):
+        filepath = event.src_path
+        filename = os.path.basename(filepath)
         print("data coming")
+        
 
 if __name__ == "__main__":
      event_handler = ChangeHandler()
@@ -35,13 +38,3 @@ if __name__ == "__main__":
          observer.stop()
      observer.join()
 
-"""
-##201110 before modified
-observer = Observer()
-
-observer.schedule(ChangeHandler([target_file]), target_dir, recursive=True)
-observer.start()
-
-while True:
-    time.sleep(60)
-"""
