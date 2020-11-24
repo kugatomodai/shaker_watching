@@ -19,6 +19,7 @@ class ChangeHandler(FileSystemEventHandler):
         filename = os.path.basename(filepath) # modified file name here 
         print("%s data coming" % filename)
         subprocess.call('python load_data.py %s' % filename, shell=True)
+        subprocess.call('python machinist.py %s' % filename, shell=True)
 
 # execute every one second       
 if __name__ == "__main__":
