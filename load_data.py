@@ -33,7 +33,6 @@ def load_data(filename):
     
     # dtype of timestamp to datetime
     df_2['Timestamp'] = pd.to_datetime(df_2['Timestamp'])
-    print(df_2)
     
     ## Write Pandas DataFrame
     write_api = client.write_api(write_options=SYNCHRONOUS)
