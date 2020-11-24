@@ -1,40 +1,38 @@
-import requests
-
-headers = {
-    'Content-type': 'application/json',
-    'Authorization': 'Bearer ${API_Key}'
-}
-
-data = '{"agent":"win10_shaker",
-"metrics": [
-{
-"name": "0D",
-"namespace": "OD_01",
-"data_point": {
-"value": 27.6
-}
-}
-]
-}'
-
-response = requests.post('https://gw.machinist.iij.jp/endpoint', headers=headers, data=data)
-
-"""
-もとのやつ
-api_key=<your_api_key>
-
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer ${api_key}" https://gw.machinist.iij.jp/endpoint -d @- << EOS
-{
-  "agent": "Home",
-  "metrics": [
-    {
-      "name": "temperature",
-      "namespace": "Environment Sensor",
-      "data_point": {
-        "value": 27.6
-      }
+import urllib.request
+import json
+import time
+APIKEY = "xxxxxx"
+Url = "https://gw.machinist.iij.jp/endpoint"
+method = "POST"
+ 
+def sendMachinist(name, pv):
+    data = {
+        "agent": "win10_sensor",
+        "metrics": [
+            {
+                "name": name,
+                "namespace": "OD_sensor",
+                "data_point": {
+                    "value": pv
+                }
+            }
+        ]
     }
-  ]
-}
-EOS
-"""
+ 
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + APIKEY,
+        "User-Agent": "Python3"
+    }
+ 
+    senddata = json.dumps(data).encode("ascii")
+    req = urllib.request.Request(Url, data=senddata, method=method, headers=headers)
+    with urllib.request.urlopen(req) as res:
+        html = res.read().decode("ascii")
+        if "Succeeded" in html:
+        print("send OK")
+ 
+i = 2
+for sdata in range(10):
+    sendMachinist(sdata+i*3);
+    time.sleep(10);
